@@ -1,0 +1,25 @@
+## docker-compose.yml
+
+services:
+  redis-1:
+    image: redis:7
+    container_name: redis-1
+    command: redis-server /etc/redis.conf --port 7001  --cluster-announce-ip 192.168.10.191 --cluster-announce-port 7001  --cluster-announce-bus-port 17001
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+      - ./data/7001:/data
+    ports:
+      - "7001:7001"
+      - "17001:17001"
+
+  redis-6:
+    image: redis:7
+    container_name: redis-6
+    command: redis-server /etc/redis.conf --port 7006  --cluster-announce-ip 192.168.10.191 --cluster-announce-port 7006  --cluster-announce-bus-port 17006
+    volumes:
+      - ./redis.conf:/etc/redis.conf
+      - ./data/7006:/data
+    ports:
+      - "7006:7006"
+      - "17006:17006"
+
