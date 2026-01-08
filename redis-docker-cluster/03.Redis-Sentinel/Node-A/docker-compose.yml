@@ -1,0 +1,22 @@
+## docker-compose.yml
+
+services:
+  redis:             ## Redis Master
+    image: redis:7
+    container_name: redis-master
+    command: redis-server /etc/redis.conf
+    volumes:
+      - ./redis-master.conf:/etc/redis.conf
+      - ./data:/data
+    ports:
+      - "6379:6379"
+
+  sentinel:         ## Redis Sentinel
+    image: redis:7
+    container_name: redis-sentinel
+    command: redis-sentinel /etc/sentinel.conf
+    volumes:
+      - ./sentinel.conf:/etc/sentinel.conf
+      - ./sentinel-data:/data
+    ports:
+      - "26379:26379"
